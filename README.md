@@ -10,8 +10,8 @@ Creates a network, where the nodes are layout in an square or rectangle grid.
 The output should be redirected to the desired file.
 Parameters:
 
-⋅⋅* -x How many columns (width) the grid will have
-··+ -y How many rows (height) the grid will have
+  * -x How many columns (width) the grid will have
+  * -y How many rows (height) the grid will have
 
 * gridsim.tcl
 Simulation file for NS2.34 with the BFG protocol used to run the simulation 
