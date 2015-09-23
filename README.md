@@ -21,4 +21,4 @@ desired file.
 * parse.sh
 Last step, this file parses and analyzes the data printed by the simulation
 plotting the results, and finally creating an animation with the plotted 
-data.
+data. Needs GNUPlot and FFMpeg binaries.

@@ -7,13 +7,13 @@ set val(ifq)        Queue/DropTail/PriQueue ;# interface queue type
 set val(ll)         LL ;# link layer type
 set val(ant)        Antenna/OmniAntenna ;# antenna model
 set val(ifqlen)     50 ;# max packet in ifq
-set val(nn)         121  ;# number of mobilenodes
+set val(nn)         400  ;# number of mobilenodes
 set val(rp)         BFG ;# routing protocol
-set val(x)          3000 ;# X dimension of topography
-set val(y)          3000 ;# Y dimension of topography
-set val(stop)       150 ;# time of simulation end
-set val(grid)       11x11_121n_c55.tcl
-set val(nodedst)    60
+set val(x)          5000 ;# X dimension of topography
+set val(y)          5000 ;# Y dimension of topography
+set val(stop)       250 ;# time of simulation end
+set val(grid)       20x20_400n.tcl
+set val(nodedst)    190 ;#Node for which we calculate the gradient
 
 
 Mac/802_11 set SlotTime_          0.000020        ;# 20us
@@ -67,6 +67,12 @@ for {set i 0} {$i < $val(nn) } { incr i } {
 source $val(grid)
 
 set god [God instance]
+
+#Print hash functions identifiers for each node
+for {set i 0} {$i < $val(nn)} {incr i} {
+    $ns at 0.0 "[$node($i) agent 255] bfrepr"
+}
+
 
 #Tell protocol to start
 for {set i 0} {$i < $val(nn)} {incr i} {
