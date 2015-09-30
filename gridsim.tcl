@@ -12,7 +12,7 @@ set val(rp)         BFG ;# routing protocol
 set val(x)          5000 ;# X dimension of topography
 set val(y)          5000 ;# Y dimension of topography
 set val(stop)       250 ;# time of simulation end
-set val(grid)       20x20_400n.tcl
+set val(grid)       20x20_400n_network.tcl
 set val(nodedst)    190 ;#Node for which we calculate the gradient
 
 

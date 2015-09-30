@@ -22,3 +22,21 @@ desired file.
 Last step, this file parses and analyzes the data printed by the simulation
 plotting the results, and finally creating an animation with the plotted 
 data. Needs GNUPlot and FFMpeg binaries.
+
+
+
+Experiment description
+===============================
+
+*Effect of D-parameters in the probabilistic gradient
+
+The D-parameters are values that have direct effect in the degradation
+of the Bloom filters, this values are the degradation probability, and
+the ratio of degradation. 
+
+For this experiment, the values of T-parameters (timers) are fixed to 
+previously observed values where the gradient remains stable through time,
+this values are:
+   *Hello Interval: 5 segundos
+   *Degradation interval: 10 segundos
+
