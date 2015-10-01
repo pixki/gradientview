@@ -74,6 +74,8 @@ for {set i 0} {$i < $val(nn)} {incr i} {
 }
 
 
+$ns at 200.0 "[$node(0) agent 255] dbgprobto $val(nodedst)"
+
 #Tell protocol to start
 for {set i 0} {$i < $val(nn)} {incr i} {
     $ns at 0.01 "[$node($i) agent 255] entersim"
@@ -87,7 +89,7 @@ for {set i 0} {$i <$val(nn)} { incr i } {
 
 
 # Print Bloom Filters every 10 seconds
-for {set t 0} {$t < $val(stop) } {incr t 10} {  
+for {set t 0} {$t < $val(stop) } {incr t 3} {  
   for {set i 0} {$i < $val(nn) } { incr i } {
     $ns at $t "[$node($i) agent 255] bfstatus $val(nodedst)"    
   }  

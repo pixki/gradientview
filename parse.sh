@@ -1,8 +1,8 @@
 #!/bin/bash
 # @Author: pixki
 # @Date:   2015-09-09 12:57:26
-# @Last Modified by:   jairo
-# @Last Modified time: 2015-09-29 20:21:50
+# @Last Modified by:   pixki
+# @Last Modified time: 2015-09-30 11:16:36
 
 echo "Separando filtros por tiempo desde $1"
 
@@ -45,7 +45,7 @@ for j in `find output -name "*.out" | sort`; do
 		set output "output/gradient-$IDX.png"
 		#set pm3d at st
 		set pm3d implicit at b
-		set hidden3d
+		set hidden3d front
 		set border 4095
 		set samples 25
 		set isosamples 20
@@ -54,10 +54,28 @@ for j in `find output -name "*.out" | sort`; do
 		set zrange [0:1.0]
 		splot "$j" using 3:4:6 with lines notitle
 	EOF
+
+	#Grafica del porcentaje de saturacion de los filtros
+	gnuplot <<- EOF
+	    reset
+		set term pngcairo enhanced font 'Verdana,9'
+		set output "output/saturation-$IDX.png"
+		#set pm3d at st
+		set pm3d implicit at b
+		set hidden3d front
+		set border 4095
+		set samples 25
+		set isosamples 20
+		set title "$TITLE t=$TIME"
+		set cbrange [0:1.0]
+		set zrange [0:1.0]
+		splot "$j" using 3:4:7 with lines notitle
+	EOF
+
 	IMG=$((IMG+1))
 done
 
-echo "Creando animacion..."
+echo "Creando animacion de gradiente..."
 
 if [[ ! -z $TITLE || $TITLE != "" ]]; then	
 	FILENAME="$TITLE";
@@ -68,6 +86,8 @@ fi
 #-framerate 1/5  = Una imagen cada 5 segundos
 #-framerate 2    = Dos imagenes por segundo
 ffmpeg -f image2 -framerate 2 -i output/gradient-%05d.png -c:v libx264 -r 30 -pix_fmt yuv420p -y "output/$FILENAME.mp4"
+
+ffmpeg -f image2 -framerate 2 -i output/saturation-%05d.png -c:v libx264 -r 30 -pix_fmt yuv420p -y "output/saturation.mp4"
 
 echo "Abriendo resultado"
 xdg-open "output/$FILENAME.mp4"
