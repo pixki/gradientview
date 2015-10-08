@@ -3,7 +3,7 @@
 # @Author: pixki
 # @Date:   2015-09-30 12:17:58
 # @Last Modified by:   pixki
-# @Last Modified time: 2015-09-30 13:41:30
+# @Last Modified time: 2015-10-08 14:48:37
 
 import sys
 import argparse
@@ -40,6 +40,7 @@ def main():
 		sys.exit(1)
 
 	lastX=0
+	intersecciones=[]
 	for (k,v) in nodes.items():	
 		if k == args.destination: continue
 					
@@ -50,8 +51,14 @@ def main():
 			print ""
 			lastX=v['x']
 
+		intersecciones.append(v['set'].intersection(nodes[args.destination]['set']))
 		print "{0} {1} {2} {3}".format(k,v['x'], v['y'], len(v['set'].intersection(nodes[args.destination]['set'])))
 
+	unionI=set([])
+	for i in intersecciones: #intersecciones es una lista de sets
+		unionI=unionI | i
+
+	print unionI
 
 if __name__ == '__main__':
 	main()
